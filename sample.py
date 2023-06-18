@@ -3,4 +3,4 @@
 a =int(input("Enter a"))
 b = int(input("Enter b"))
 c = a + b
-print ("The Answer is ",c)
+print ("The Answer is =",c)
