@@ -23,7 +23,8 @@ plotdata.update_layout(
     title='The Candlestick project',#Graph Title name
     yaxis_title='Stock',#y axis title name
     yaxis=dict(range=[13000,14100]),# y axis data range
-    xaxis_title='Date/Time', # x axis title namex
+    xaxis_title='Date/Time', # x axis title name
+    xaxis_rangeslider_visible = False
     ) 
 
 plotdata.update_xaxes(
