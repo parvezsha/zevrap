@@ -1,5 +1,6 @@
 import plotly.graph_objects as go
 import pandas as pd
+from plotly.subplots import make_subplots
 from datetime import datetime
 #Read the CSV file into df
 datafile = pd.read_csv("last10.csv")
@@ -11,6 +12,7 @@ change_datetime = pd.DataFrame({'date':datafile['datetime']})
 change_datetime['datetime'] =pd.to_datetime(change_datetime['date'],format='%Y%m%d%H:%M')#datetime format changed
 
 #candlestick plot 
+#plotdata = make_subplots(specs=[[{"secondary_y": True}]])
 plotdata = go.Figure(data=[go.Candlestick(x=change_datetime['datetime'],
                             open=datafile['open'],
                             high=datafile['high'],
@@ -22,7 +24,7 @@ plotdata = go.Figure(data=[go.Candlestick(x=change_datetime['datetime'],
 plotdata.update_layout(
     title='The Candlestick project',#Graph Title name
     yaxis_title='Stock',#y axis title name
-    yaxis=dict(range=[13000,14100]),# y axis data range
+   # yaxis=dict(range=[13000,14100]),# y axis data range
     xaxis_title='Date/Time', # x axis title name
     xaxis_rangeslider_visible = False
     ) 
@@ -36,4 +38,15 @@ plotdata.update_xaxes(
             #dict(values=["2019-12-25", "2020-12-25"])  # hide holidays (Christmas and New Year's, etc)
         ]
     )
+plotdata.add_trace(go.Scatter(x = change_datetime['datetime'],
+                                y = datafile['high'],
+                                mode = "markers",
+                                marker_symbol="triangle-up",
+                                marker_size = 10))
+plotdata.add_trace(go.Scatter(x = change_datetime['datetime'],
+                                y = datafile['low'],
+                                mode = "markers",
+                                marker_symbol="triangle-down",
+                                marker_size = 10))
+
 plotdata.show()
