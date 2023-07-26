@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import urllib.parse
 
 header = {
     'Accept':'application/json, text/javascript, */*; q=0.01',
@@ -9,11 +10,10 @@ header = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
     'X-Requested-With':'XMLHttpRequest'
     }
-#stockname = input("Enter Stock Name ")
-#link = '"https://www.nseindia.com/api/chart-databyindex?index='+ stockname +'"'
-
-response = requests.get(url="https://www.nseindia.com/api/chart-databyindex?index=ITCEQN",headers=header)
-#response = requests.get(url= link,headers=header)
+stockname = input("Enter Stock Name ")
+link = 'https://www.nseindia.com/api/chart-databyindex?index='+ stockname 
+#response = requests.get(url="https://www.nseindia.com/api/chart-databyindex?index=ITCEQN",headers=header)
+response = requests.get(link,headers=header)
 #print(response)
 #print(header)
 itc = pd.DataFrame(response.json()['grapthData'])
